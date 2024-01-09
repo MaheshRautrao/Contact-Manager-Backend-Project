@@ -3,6 +3,7 @@ const dotenv = require("dotenv").config();
 
 const connectDB = require("./db/dbConnection");
 const contactRouter = require("./routes/contactRoutes");
+const userRouter = require("./routes/userRoutes");
 
 const errorHandler = require("./middlewares/errorHandler");
 
@@ -10,11 +11,12 @@ const errorHandler = require("./middlewares/errorHandler");
 connectDB();
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 
 app.use("/api/contacts", contactRouter);
+app.use("/api/users", userRouter);
 app.use(errorHandler);
 
 app.listen(port, () => {
